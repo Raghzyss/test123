@@ -9,43 +9,44 @@
 </head>
 
 <body>
-    <div class="container">
+    <header>
+        <img src="govt-logo.png" alt="Government Logo" class="logo">
         <h1>Your RTI Application</h1>
+    </header>
+
+    <div class="container">
         <div id="rtiOutput">
             <p>Loading your RTI letter...</p>
         </div>
-        <button onclick="downloadRTI()">Download RTI</button>
-        <button onclick="goBack()">Edit Query</button>
-        <button onclick="printRTI()">🖨 Print</button>
-        <button onclick="shareRTI()">📤 Share</button>
+        <div class="buttons">
+            <button onclick="downloadRTI()">⬇ Download</button>
+            <button onclick="printRTI()">🖨 Print</button>
+            <button onclick="shareRTI()">📤 Share</button>
+            <button onclick="goBack()">✏ Edit</button>
+        </div>
     </div>
+
+    <footer>
+        <p>© 2025 Government of India | Ministry of Information & Transparency</p>
+    </footer>
 
     <script>
         // Retrieve RTI data from local storage
         const rtiData = JSON.parse(localStorage.getItem("rtiData"));
 
-        if (rtiData) {
-            document.getElementById("rtiOutput").innerHTML = `
-                <p><strong>From:</strong><br>
-                ${rtiData.name},<br>
-                ${rtiData.address}</p>
-
-                <p><strong>To:</strong><br>
-                Public Information Officer,<br>
-                ${rtiData.department}</p>
-
-                <p><strong>Subject:</strong> Request for Information under RTI Act</p>
-
-                <p><strong>Respected Sir/Madam,</strong><br>
-                I hereby seek the following information under the RTI Act:<br>
-                <em>${rtiData.query}</em></p>
-
-                <p>I am ready to pay the prescribed fee. Kindly provide the requested information at the earliest.</p>
-
-                <p>Regards,<br>
-                ${rtiData.name}</p>
-            `;
+        function generateRTI() {
+            if (rtiData) {
+                document.getElementById("rtiOutput").innerHTML = `
+                    <p><strong>From:</strong><br>${rtiData.name},<br>${rtiData.address}</p>
+                    <p><strong>To:</strong><br>Public Information Officer,<br>${rtiData.department}</p>
+                    <p><strong>Subject:</strong> Request for Information under RTI Act</p>
+                    <p><strong>Respected Sir/Madam,</strong><br>${rtiData.query}</p>
+                    <p>Regards,<br>${rtiData.name}</p>
+                `;
+            }
         }
+
+        setTimeout(generateRTI, 1000); // Smooth loading effect
 
         function downloadRTI() {
             const text = document.getElementById("rtiOutput").innerText;
@@ -56,40 +57,24 @@
             link.click();
         }
 
+        function printRTI() {
+            window.print();
+        }
+
+        function shareRTI() {
+            const text = document.getElementById("rtiOutput").innerText;
+            if (navigator.share) {
+                navigator.share({ title: "RTI Application", text: text })
+                    .then(() => console.log("Shared successfully"))
+                    .catch(err => console.log("Share failed:", err));
+            } else {
+                alert("Sharing not supported on this device.");
+            }
+        }
+
         function goBack() {
             window.location.href = "form.html";
         }
-
-        function printRTI() {
-        window.print();
-    }
-
-    function shareRTI() {
-        const text = document.getElementById("rtiOutput").innerText;
-        if (navigator.share) {
-            navigator.share({
-                title: "RTI Application",
-                text: text
-            }).then(() => console.log("Shared successfully"))
-              .catch(err => console.log("Share failed:", err));
-        } else {
-            alert("Sharing not supported on this device.");
-        }
-    }
-    const output = document.getElementById("rtiOutput");
-
-    if (rtiData) {
-        output.innerHTML = `<p>Generating RTI Letter...</p>`;
-        setTimeout(() => {
-            output.innerHTML = `
-                <p><strong>From:</strong><br> ${rtiData.name},<br>${rtiData.address}</p>
-                <p><strong>To:</strong><br> Public Information Officer,<br>${rtiData.department}</p>
-                <p><strong>Subject:</strong> Request for Information under RTI Act</p>
-                <p><strong>Respected Sir/Madam,</strong><br> ${rtiData.query}</p>
-                <p>Regards,<br>${rtiData.name}</p>
-            `;
-        }, 1000); // Delay for smooth effect
-    }
     </script>
 </body>
 
