@@ -75,15 +75,19 @@
     </footer>
 
     <script>
-        function startRTI() {
-            // Check login status before redirecting
+        window.onload = function() {
             const isLoggedIn = localStorage.getItem('isLoggedIn');
             if (isLoggedIn === 'true') {
-                window.location.href = "form.html";
+                // Show the home page and let users navigate manually
+                document.getElementById('startRTI').style.display = 'block';
             } else {
-                alert("Please login to proceed with RTI filing.");
+                // Redirect to login if not logged in
                 window.location.href = "login.html";
             }
+        };
+    
+        function startRTI() {
+            window.location.href = "form.html"; // Redirect when user clicks the button
         }
     </script>
 </body>
