@@ -76,6 +76,20 @@
             alert("Sharing not supported on this device.");
         }
     }
+    const output = document.getElementById("rtiOutput");
+
+    if (rtiData) {
+        output.innerHTML = `<p>Generating RTI Letter...</p>`;
+        setTimeout(() => {
+            output.innerHTML = `
+                <p><strong>From:</strong><br> ${rtiData.name},<br>${rtiData.address}</p>
+                <p><strong>To:</strong><br> Public Information Officer,<br>${rtiData.department}</p>
+                <p><strong>Subject:</strong> Request for Information under RTI Act</p>
+                <p><strong>Respected Sir/Madam,</strong><br> ${rtiData.query}</p>
+                <p>Regards,<br>${rtiData.name}</p>
+            `;
+        }, 1000); // Delay for smooth effect
+    }
     </script>
 </body>
 
