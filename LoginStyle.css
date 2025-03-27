@@ -1,0 +1,112 @@
+/* General Styles */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(170deg, #b36d2c, white, #296732);
+    font-family: Arial, sans-serif;
+    margin: 0;
+}
+
+/* Login Container */
+.container {
+    background: #1c1c9f;
+    padding: 25px;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    width: 320px;
+    text-align: center;
+    color: white;
+}
+
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+}
+
+input {
+    width: 90%;
+    padding: 12px;
+    border: 1px solid #555;
+    border-radius: 20px;
+    font-size: 14px;
+    background: #33334d;
+    color: white;
+}
+
+/* Buttons */
+button, .google-btn {
+    width: 95%;
+    padding: 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Login Button */
+#submit-btn {
+    background-color: #f7f7f7;
+    color: black;
+    border: none;
+}
+
+#submit-btn:hover {
+    background-color: #4c72c5;
+}
+
+/* Google Button */
+.google-btn {
+    background: white;
+    color: #444;
+    border: 1px solid #ccc;
+    font-weight: 600;
+    margin-top: 10px;
+    height: 40px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-left: 9px;
+}
+
+.google-btn img {
+    width: 18px;
+    height: 18px;
+}
+
+.google-btn:hover {
+    background: #f5f5f5;
+    box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* Forgot Password Link */
+.forgot-password {
+    color: #ffcc00; /* Updated Color */
+    font-size: 14px;
+    text-decoration: none;
+    display: block;
+    margin-top: 10px;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+/* Toggle Button */
+.toggle-btn {
+    background: none;
+    color: #6e8efb;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.toggle-btn:hover {
+    text-decoration: underline;
+}
