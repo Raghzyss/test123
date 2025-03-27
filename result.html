@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generated RTI Letter</title>
     <link rel="stylesheet" href="resultstyle.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Your RTI Application</h1>
@@ -14,6 +16,8 @@
         </div>
         <button onclick="downloadRTI()">Download RTI</button>
         <button onclick="goBack()">Edit Query</button>
+        <button onclick="printRTI()">🖨 Print</button>
+        <button onclick="shareRTI()">📤 Share</button>
     </div>
 
     <script>
@@ -55,6 +59,24 @@
         function goBack() {
             window.location.href = "form.html";
         }
+
+        function printRTI() {
+        window.print();
+    }
+
+    function shareRTI() {
+        const text = document.getElementById("rtiOutput").innerText;
+        if (navigator.share) {
+            navigator.share({
+                title: "RTI Application",
+                text: text
+            }).then(() => console.log("Shared successfully"))
+              .catch(err => console.log("Share failed:", err));
+        } else {
+            alert("Sharing not supported on this device.");
+        }
+    }
     </script>
 </body>
+
 </html>

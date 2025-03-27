@@ -71,3 +71,28 @@ button {
 button:hover {
     background: #e68900;
 }
+
+/* Language Dropdown */
+select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #444;
+    background: #2a2a2a;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    appearance: none; /* Removes default arrow in some browsers */
+}
+
+select:focus {
+    outline: none;
+    border-color: #ff9800;
+}
+
+label {
+    font-size: 16px;
+    display: block;
+    text-align: left;
+    margin-bottom: 5px;
+}
