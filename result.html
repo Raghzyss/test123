@@ -1,52 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Generated RTI Letter</title>
+    <title>RTI Application Result</title>
     <link rel="stylesheet" href="resultstyle.css">
 </head>
-
 <body>
     <header>
-        <img src="logo.jpg" alt="Government Logo" class="logo">
-        <h1>Your RTI Application</h1>
+        <div class="header-container">
+            <img src="logo.jpg" alt="Government Logo" class="logo">
+            <h1>Right to Information (RTI) Application</h1>
+            <div class="header-meta">
+                <span class="application-number">Application No: RTI-2025-00123</span>
+                <span class="application-date">Submitted: 27 March 2025</span>
+            </div>
+        </div>
     </header>
 
-    <div class="container">
-        <div id="rtiOutput">
-            <p>Loading your RTI letter...</p>
-        </div>
-        <div class="buttons">
-            <button onclick="downloadRTI()">⬇ Download</button>
-            <button onclick="printRTI()">🖨 Print</button>
-            <button onclick="shareRTI()">📤 Share</button>
-            <button onclick="goBack()">✏ Edit</button>
-        </div>
-    </div>
+    <main class="container">
+        <section class="rti-details">
+            <div id="rtiOutput" class="rti-content">
+                <div class="applicant-info">
+                    <h2>Applicant Details</h2>
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <strong>Name:</strong>
+                            <span id="applicantName">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Address:</strong>
+                            <span id="applicantAddress">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Contact:</strong>
+                            <span id="applicantContact">Loading...</span>
+                        </div>
+                        <div class="info-item">
+                            <strong>Email:</strong>
+                            <span id="applicantEmail">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="request-details">
+                    <h2>Request Information</h2>
+                    <div class="request-content">
+                        <p><strong>Department:</strong> <span id="requestDepartment">Loading...</span></p>
+                        <p><strong>Subject:</strong> Request for Information under RTI Act</p>
+                        <p><strong>Detailed Query:</strong></p>
+                        <div id="detailedQuery" class="query-box">Loading...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="action-section">
+            <div class="buttons">
+                <button onclick="downloadRTI()" class="btn btn-download">
+                    <span>⬇</span> Download PDF
+                </button>
+                <button onclick="printRTI()" class="btn btn-print">
+                    <span>🖨</span> Print Application
+                </button>
+                <button onclick="shareRTI()" class="btn btn-share">
+                    <span>📤</span> Share Document
+                </button>
+                <button onclick="goBack()" class="btn btn-edit">
+                    <span>✏</span> Edit Application
+                </button>
+            </div>
+        </section>
+
+        <section class="status-section">
+            <h2>Application Status</h2>
+            <div class="status-timeline">
+                <div class="status-item active">
+                    <span class="status-icon">📝</span>
+                    <span class="status-text">Application Submitted</span>
+                    <span class="status-date">27 March 2025</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">🔍</span>
+                    <span class="status-text">Under Review</span>
+                    <span class="status-date">Pending</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">📋</span>
+                    <span class="status-text">Response Preparation</span>
+                    <span class="status-date">Pending</span>
+                </div>
+                <div class="status-item">
+                    <span class="status-icon">✅</span>
+                    <span class="status-text">Completed</span>
+                    <span class="status-date">-</span>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <footer>
-        <p>© 2025 Government of India | Ministry of Information & Transparency</p>
+        <div class="footer-content">
+            <p>© 2025 Government of India | Ministry of Information & Transparency</p>
+            <div class="footer-links">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
     </footer>
 
     <script>
         // Retrieve RTI data from local storage
-        const rtiData = JSON.parse(localStorage.getItem("rtiData"));
+        const rtiData = JSON.parse(localStorage.getItem("rtiData")) || {
+            name: "Sample Applicant",
+            address: "123 Democracy Lane, New Delhi",
+            contact: "+91 9876543210",
+            email: "sample.applicant@example.com",
+            department: "Central Information Commission",
+            query: "I would like to request detailed information about the recent infrastructure development project in my district, including project costs, timeline, and expected benefits."
+        };
 
         function generateRTI() {
-            if (rtiData) {
-                document.getElementById("rtiOutput").innerHTML = `
-                    <p><strong>From:</strong><br>${rtiData.name},<br>${rtiData.address}</p>
-                    <p><strong>To:</strong><br>Public Information Officer,<br>${rtiData.department}</p>
-                    <p><strong>Subject:</strong> Request for Information under RTI Act</p>
-                    <p><strong>Respected Sir/Madam,</strong><br>${rtiData.query}</p>
-                    <p>Regards,<br>${rtiData.name}</p>
-                `;
-            }
+            document.getElementById("applicantName").textContent = rtiData.name;
+            document.getElementById("applicantAddress").textContent = rtiData.address;
+            document.getElementById("applicantContact").textContent = rtiData.contact;
+            document.getElementById("applicantEmail").textContent = rtiData.email;
+            document.getElementById("requestDepartment").textContent = rtiData.department;
+            document.getElementById("detailedQuery").textContent = rtiData.query;
         }
 
-        setTimeout(generateRTI, 1000); // Smooth loading effect
+        // Smooth loading effect
+        setTimeout(generateRTI, 1000);
 
         function downloadRTI() {
             const text = document.getElementById("rtiOutput").innerText;
@@ -64,9 +149,12 @@
         function shareRTI() {
             const text = document.getElementById("rtiOutput").innerText;
             if (navigator.share) {
-                navigator.share({ title: "RTI Application", text: text })
-                    .then(() => console.log("Shared successfully"))
-                    .catch(err => console.log("Share failed:", err));
+                navigator.share({ 
+                    title: "RTI Application", 
+                    text: text 
+                })
+                .then(() => console.log("Shared successfully"))
+                .catch(err => console.log("Share failed:", err));
             } else {
                 alert("Sharing not supported on this device.");
             }
@@ -77,5 +165,4 @@
         }
     </script>
 </body>
-
 </html>
